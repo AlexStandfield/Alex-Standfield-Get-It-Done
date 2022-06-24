@@ -13,8 +13,6 @@ let displayRepos = function (repos, searchTerm) {
     console.log(repos);
     console.log(searchTerm);
 
-    // Clear Old Content
-    repoContainerEl.textContent = "";
     repoSearchTerm.textContent = searchTerm;
 
     // Loop Over Repos
@@ -43,6 +41,9 @@ let displayRepos = function (repos, searchTerm) {
         } else {
             statusEl.innerHTML = "<i class='fas fa-check-square status-icon icon-success'></i>";
         }
+
+        // Appent to Container
+        repoEl.appendChild(statusEl);
 
         // Append Container to the DOM
         repoContainerEl.appendChild(repoEl);
@@ -78,12 +79,13 @@ let formSubmitHandler = function(event) {
 
     if (username) {
         getUserRepos(username);
+
+        // Clear Old Content
+        repoContainerEl.textContent = "";
         nameInputEl.value = "";
     } else {
         alert("Please enter a GitHub username.");
     }
 };
-
-getUserRepos("AlexStandfield");
 
 userFormEl.addEventListener("submit", formSubmitHandler);
